@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Musical Mosaic - Compose & Play!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* --- (same as above, no changes) --- */
+body {
+  margin: 0; padding: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #fcfcfc;
+  color: #222;
+}
+
+header {
+  text-align: center;
+  margin: 2.2em 0 0 0;
+}
+.header-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 2.7em;
+  font-weight: 700;
+  color: #19dbc3;
+  letter-spacing: .03em;
+}
+.header-sub {
+  font-size: 1.14em;
+  color: #999;
+  margin-top: 0.15em;
+  letter-spacing: .02em;
+}
+.header-welcome {
+  margin-top: 1.3em;
+  background: #f2f6f6;
+  border-radius: 1.4em;
+  display: inline-block;
+  padding: 0.8em 2.3em;
+  font-weight: 600;
+  color: #1cbfa2;
+  font-size: 1.14em;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px #16a08511;
+}
+.section-card {
+  background: #fff;
+  border-radius: 1.25em;
+  box-shadow: 0 2px 8px #16a08510;
+  padding: 2.2em 2.1em 1.6em;
+  max-width: 800px;
+  margin: 2.2em auto 1.5em auto;
+}
+.inline-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1em;
+  justify-content: center;
+}
+.mainBtn {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  background: #f2f6f6;
+  border: none;
+  outline: none;
+  color: #10bfae;
+  border-radius: 13px;
+  padding: 1em 2.5em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #16a08507;
+  margin: 0 0.65em;
+  transition: background 0.16s, color 0.18s;
+  display: flex; align-items: center; gap: 0.5em;
+}
+.mainBtn:active, .mainBtn:focus-visible { outline: 2px solid #1bc4a7; background: #e7faee; }
+.mainBtn.main-intro { background: #19dbc3; color: #fff;}
+.mainBtn.main-record { background: #fc912c; color: #fff;}
+.mainBtn.main-guide { background: #f5f5fa; color: #111; border: 2px solid #e4e4e7;}
+.mainBtn svg { font-size: 1.1em !important; }
+#patternStatus, #status {
+  font-weight: 700; color: #fca72e;
+  margin: 1.2em 0 0.7em 0; text-align: center;
+}
+#status {
+  color: #12bfae; font-weight: 600;
+}
+.instruments-card {
+  background: #fff;
+  border-radius: 1.15em;
+  box-shadow: 0 2px 8px #16a08510;
+  padding: 2.1em 0.6em 1.5em 0.6em;
+  max-width: 800px;
+  margin: 0 auto 2.1em auto;
+}
+.instruments-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.35em;
+  color: #222;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.23em;
+}
+.instruments-desc {
+  color: #444; font-size: 1.03em; text-align: center; margin-bottom: 1.3em;
+}
+#galleryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.1em;
+  margin-bottom: 0.5em;
+}
+.instrBtn {
+  background: #fff;
+  border: 2.2px solid #e7e9ee;
+  border-radius: 24px;
+  box-shadow: 0 1px 7px #d0efe42e;
+  font-size: 1em; font-family: inherit;
+  font-weight: 700;
+  width: 108px; height: 106px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: border 0.14s, background 0.14s;
+  color: #13c0a7;
+  cursor: pointer;
+  outline: none;
+}
+.instrBtn:focus-visible { border: 2.2px solid #fc912c;}
+.instrBtn .instrIcon {
+  font-size: 2.2em; margin-bottom: 0.24em;
+}
+.instrBtn .instrLabel {
+  font-size: 1.1em; color: #0e9e86;
+  margin-top: 3px;
+}
+.instrBtn.active,.instrBtn:active { border:2.2px solid #19dbc3; background: #e5f9f7;}
+.instrBtn[aria-pressed="true"] {
+  border: 2.2px solid #fc912c !important; background: #fff9ef;
+}
+@media (max-width:600px) {
+  .section-card, .instruments-card { padding: 1.42em 0.18em 1.05em; }
+  .inline-group { gap:0.5em;}
+  .instrBtn { width: 88px; height: 84px; }
+}
+.cardFlex { display:flex; justify-content:center; flex-wrap:wrap; gap:1.2em;}
+#musicTiles {
+  display: flex; gap: 1.2em; justify-content: center; margin: 1.7em 0 1em 0;
+}
+.tile {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.19em;
+  padding: 0.82em 1.3em;
+  background:#19dbc3; color:#fff; border-radius: 0.9em;
+  box-shadow: 0 2px 7px #3cd6ce10;
+  text-align: center;
+  margin: 0;
+  transition: background 0.17s;
+  border:none;
+}
+.tile.active { background:#fc912c; color:#fff; }
+.musicseq-title {
+  font-family: 'Montserrat',sans-serif; font-weight:700;
+  font-size:1.22em; text-align:center; margin:0.9em 0 0.29em 0;
+}
+.usage-card {
+  background: #fff;
+  border-radius: 1.1em;
+  box-shadow: 0 2px 5px #1abc9c08;
+  padding: 2.1em 2.1em 1.39em;
+  max-width: 800px;
+  margin: 0.5em auto 1.3em auto;
+}
+.usage-title { font-family:'Montserrat',sans-serif; font-size:1.1em; font-weight:700; margin-bottom:0.8em;}
+.usage-list { margin:0.15em 0 0 1.2em; }
+.usage-list li {margin-bottom:0.44em;}
+.pauseBtn {
+  background: #19dbc3; color:#fff; font-weight:700; padding:0.75em 1.85em;
+  border:none; border-radius:13px; font-size:1.1em; cursor:pointer;
+  margin:0 .6em; letter-spacing:.02em;
+  transition: background 0.17s;
+}
+.pauseBtn:active, .pauseBtn:focus-visible { outline: 2px solid #fc912c; background: #17bfa1;}
+.playingStatus {
+  color: #fc912c; font-weight:700; font-size:1.09em; letter-spacing:0.01em; margin-left:0.3em;
+}
+.flex-center { display:flex; align-items:center; justify-content:center; }
+footer {
+  color: #b2bdbb; text-align: center;
+  font-size: 1em; margin:4.1em 0 1em 0;
+  letter-spacing: 0.01em;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-title">Musical Mosaic</div>
+  <div class="header-sub">Professional Music Creation Studio</div>
+  <div class="header-welcome">Welcome! Let's create beautiful music together</div>
+</header>
+
+<main id="main" class="active">
+  <div class="section-card">
+    <div class="inline-group">
+      <button class="mainBtn main-intro" id="introAudioBtn">
+        <svg width="20" height="20"><circle r="8" cx="10" cy="10" fill="#fff" stroke="#15ddb8" stroke-width="2"/><path d="M13 10l-4-3v6z" fill="#15ddb8"/></svg>
+        Hear Introduction
+      </button>
+      <button class="mainBtn main-record" id="recordBtn">
+        <svg width="20" height="20"><circle cx="10" cy="10" r="7" stroke="#fff" stroke-width="2" fill="#fff"/><circle cx="10" cy="10" r="5" stroke="#fc912c" stroke-width="2" fill="#fc912c"/></svg>
+        Record Composition
+      </button>
+      <button class="mainBtn main-guide" id="helpBtn">
+        <svg width="22" height="22" fill="none" stroke="#19dbc3" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M11 7v3.5a1 1 0 0 0 1 1h0.5"/><circle cx="11" cy="16" r="1.2"/></svg>
+        Help &amp; Guide
+      </button>
+    </div>
+  </div>
+  <div class="instruments-card">
+    <div class="instruments-title">Select Instruments</div>
+    <div class="instruments-desc">Click instruments to add them to your composition</div>
+    <div id="galleryButtons"></div>
+    <div id="patternStatus"></div>
+  </div>
+  <div class="section-card flex-center" style="padding:0.7em 2.1em 0.7em 2.1em;">
+    <button class="pauseBtn" id="pauseBtn">Pause</button>
+    <div class="playingStatus" id="playingStatus">♪ Pattern is playing</div>
+  </div>
+  <div class="section-card">
+    <div class="musicseq-title">Musical Sequence</div>
+    <div style="text-align:center;color:#888;font-size:1.01em;margin:0 0 1.1em 0;">Active notes in your composition</div>
+    <div id="musicTiles"></div>
+  </div>
+  <div class="usage-card">
+    <div class="usage-title">How to Use Musical Mosaic</div>
+    <ul class="usage-list">
+      <li><b>Click instruments</b> to add or remove them from your composition</li>
+      <li><b>Use the Record button</b> to capture and save your musical creations</li>
+      <li><b>Say "Help"</b> at any time for voice-guided assistance</li>
+      <li><b>Adjust accessibility settings</b> using the controls in the top-right corner</li>
+    </ul>
+  </div>
+</main>
+
+<!-- HIDDEN pages -->
+<section id="helpPage" style="display:none;">
+  <div style="font-size:1.45em;font-weight:700;margin:0.7em 0;">🎼 How to Use Musical Mosaic</div>
+  <div class="helpBox" style="background:#f2f6f6;border-radius:1em;padding:1.4em 2em;margin-top:0.4em;box-shadow:0 2px 12px #16a08517;">
+    <div style="font-size:1.1em;margin-bottom:0.9em;">Speak or click any of these commands:<br/>(Tap 🔊 to hear each command)</div>
+    <div id="helpCommands"></div>
+  </div>
+  <div style="margin-top:2em;">
+    <button class="mainBtn main-guide" onclick="showMain()" aria-label="Back to home">Back</button>
+  </div>
+</section>
+<section id="recordingPage" style="display:none;">
+  <div class="centerBox" style="text-align:center;">
+    <span id="recIcon" aria-label="Recording in progress" style="font-size:2.2em;color:#e74c3c;display:none;">●</span>
+    <div id="recordingTimer"></div>
+    <div class="label" style="font-size:1.13em;">Recording... Say instrument names or add/remove instruments while pattern plays!</div>
+    <div style="max-width: 410px;margin:1.1em auto 1.8em auto;font-size:1em;">
+      (Say <strong>"Stop Recording"</strong> or <strong>"Stop Music"</strong> to finish.)
+    </div>
+    <button class="mainBtn main-guide" id="stopRecordBtn" aria-label="Stop recording">Stop Recording</button>
+    <button class="mainBtn main-guide" onclick="showHelp()" aria-label="Show help">Help</button>
+  </div>
+</section>
+<section id="songPage" style="display:none;">
+  <div class="centerBox" style="text-align:center;">
+    <div style="font-size:1.44em;margin:0.7em 0">🎵 Your Song is Ready!</div>
+    <audio id="userAudio" controls aria-label="Listen to your recording"></audio>
+    <div class="encourage" style="color:#fca72e;font-weight:600;margin-top:1.1em;">
+      Awesome! Want to create another? Try with different instruments!
+    </div>
+    <div style="margin-top:1.3em;">
+      <button class="mainBtn main-guide" onclick="showMain()" aria-label="Back to main menu">Back Home</button>
+      <button class="mainBtn main-record" id="newRecordBtn" aria-label="Record again">Record Again</button>
+    </div>
+  </div>
+</section>
+<footer>
+  © 2025 Musical Mosaic Studio ・ Professional Music Creation Platform
+</footer>
+<script src="music-game.js"></script>
+</body>
+</html>
