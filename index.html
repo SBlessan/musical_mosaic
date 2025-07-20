@@ -8,14 +8,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* --- (same as above, no changes) --- */
 body {
   margin: 0; padding: 0;
   font-family: 'Roboto', Arial, sans-serif;
   background: #fcfcfc;
   color: #222;
 }
-
 header {
   text-align: center;
   margin: 2.2em 0 0 0;
@@ -187,6 +185,13 @@ header {
   color: #fc912c; font-weight:700; font-size:1.09em; letter-spacing:0.01em; margin-left:0.3em;
 }
 .flex-center { display:flex; align-items:center; justify-content:center; }
+
+/* Recording Page Animation */
+@keyframes pulseAnim {
+  0%{text-shadow:0 0 0px #e74c3c;}
+  50%{text-shadow:0 0 12px #e74c3c88;}
+  100%{text-shadow:0 0 0 #e74c3c;}
+}
 footer {
   color: #b2bdbb; text-align: center;
   font-size: 1em; margin:4.1em 0 1em 0;
@@ -255,18 +260,33 @@ footer {
     <button class="mainBtn main-guide" onclick="showMain()" aria-label="Back to home">Back</button>
   </div>
 </section>
+
+<!-- Modern, Enhanced RECORDING PAGE CARD -->
 <section id="recordingPage" style="display:none;">
-  <div class="centerBox" style="text-align:center;">
-    <span id="recIcon" aria-label="Recording in progress" style="font-size:2.2em;color:#e74c3c;display:none;">●</span>
-    <div id="recordingTimer"></div>
-    <div class="label" style="font-size:1.13em;">Recording... Say instrument names or add/remove instruments while pattern plays!</div>
-    <div style="max-width: 410px;margin:1.1em auto 1.8em auto;font-size:1em;">
-      (Say <strong>"Stop Recording"</strong> or <strong>"Stop Music"</strong> to finish.)
+  <div class="section-card" style="max-width:450px;margin:3em auto 2.5em auto;text-align:center;">
+    <div style="margin-bottom:2.1em;">
+      <span id="recIcon" aria-label="Recording in progress"
+            style="display:inline-block;font-size:3.3em;color:#e74c3c;animation:pulseAnim 1.2s infinite;vertical-align:middle;">
+        ●
+      </span>
     </div>
-    <button class="mainBtn main-guide" id="stopRecordBtn" aria-label="Stop recording">Stop Recording</button>
-    <button class="mainBtn main-guide" onclick="showHelp()" aria-label="Show help">Help</button>
+    <div id="recordingTimer" style="font-size:2em;margin:0.35em 0 1.1em 0;font-weight:700;color:#12bfae;">0:00</div>
+    <div class="label" style="font-size:1.13em;color:#13c0a7;">
+      Recording... Say instrument names or add/remove.<br>
+      <small style="color:#999">(Mix multiple as you perform!)</small>
+    </div>
+    <div style="background:#fff7ec;color:#fc912c;margin:2em 0 2em 0;padding:1.1em 1.1em;border-radius:0.7em;font-size:1.08em;font-weight:600;">
+      When done, say <strong>"Stop Recording"</strong> or press the Stop button.<br>
+      You can try playing and layering different instruments with your voice!
+    </div>
+    <button class="mainBtn main-record" id="stopRecordBtn" style="margin-bottom:1em;font-size:1.19em;padding:0.9em 2.7em;">■ Stop Recording</button>
+    <div style="margin-top:1.2em;">
+      <button class="mainBtn main-guide" onclick="showHelp()" aria-label="Show help">Help</button>
+      <button class="mainBtn main-guide" onclick="showMain()" aria-label="Back to home">Cancel</button>
+    </div>
   </div>
 </section>
+
 <section id="songPage" style="display:none;">
   <div class="centerBox" style="text-align:center;">
     <div style="font-size:1.44em;margin:0.7em 0">🎵 Your Song is Ready!</div>
@@ -280,6 +300,7 @@ footer {
     </div>
   </div>
 </section>
+
 <footer>
   © 2025 Musical Mosaic Studio ・ Professional Music Creation Platform
 </footer>
