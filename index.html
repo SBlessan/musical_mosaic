@@ -185,8 +185,6 @@ header {
   color: #fc912c; font-weight:700; font-size:1.09em; letter-spacing:0.01em; margin-left:0.3em;
 }
 .flex-center { display:flex; align-items:center; justify-content:center; }
-
-/* Recording Page Animation */
 @keyframes pulseAnim {
   0%{text-shadow:0 0 0px #e74c3c;}
   50%{text-shadow:0 0 12px #e74c3c88;}
@@ -249,19 +247,35 @@ footer {
   </div>
 </main>
 
-<!-- HIDDEN pages -->
+<!-- Beautiful Modern HELP PAGE -->
 <section id="helpPage" style="display:none;">
-  <div style="font-size:1.45em;font-weight:700;margin:0.7em 0;">🎼 How to Use Musical Mosaic</div>
-  <div class="helpBox" style="background:#f2f6f6;border-radius:1em;padding:1.4em 2em;margin-top:0.4em;box-shadow:0 2px 12px #16a08517;">
-    <div style="font-size:1.1em;margin-bottom:0.9em;">Speak or click any of these commands:<br/>(Tap 🔊 to hear each command)</div>
-    <div id="helpCommands"></div>
-  </div>
-  <div style="margin-top:2em;">
-    <button class="mainBtn main-guide" onclick="showMain()" aria-label="Back to home">Back</button>
+  <div class="section-card" style="max-width:540px;margin:3em auto 2.5em auto;">
+    <div style="font-size:1.65em;font-weight:800;text-align:center;color:#19dbc3;margin:0.1em 0 0.25em 0;">
+      <span aria-label="music">🎼</span> Voice Commands Guide
+    </div>
+    <div style="font-size:1.09em;color:#222;text-align:center;margin-bottom:1.25em;font-weight:500;line-height:1.45;">
+      <span style="color:#fc912c;font-size:1.07em;font-weight:700;">Tip:</span>
+      Say any command or tap
+      <span style="background:#f5f5fa;padding:0.17em 0.6em;border-radius:1em;">
+        <span aria-label="speaker" style="font-size:1.1em;">🔊</span>
+      </span>
+      to hear it spoken aloud.
+    </div>
+    <div class="helpBox" style="background:#f5f9fc;border-radius:1em;padding:1.45em 1.3em 1.05em 1.3em;box-shadow:0 2px 8px #16a0851a;">
+      <div id="helpCommands"></div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:1.2em;margin-top:2em;">
+      <button class="mainBtn main-guide" onclick="showMain()" aria-label="Back to home">
+        <span aria-label="back">&larr;</span> Back to Home
+      </button>
+      <button class="mainBtn main-intro" onclick="speak(INTRO_TEXT)" aria-label="Read Introduction Again">
+        <span aria-label="speaker" style="font-size:1.2em;">🔊</span> Replay Introduction
+      </button>
+    </div>
   </div>
 </section>
 
-<!-- Modern, Enhanced RECORDING PAGE CARD -->
+<!-- Modern RECORDING PAGE -->
 <section id="recordingPage" style="display:none;">
   <div class="section-card" style="max-width:450px;margin:3em auto 2.5em auto;text-align:center;">
     <div style="margin-bottom:2.1em;">
@@ -300,7 +314,6 @@ footer {
     </div>
   </div>
 </section>
-
 <footer>
   © 2025 Musical Mosaic Studio ・ Professional Music Creation Platform
 </footer>
